@@ -2,44 +2,31 @@ document.addEventListener("DOMContentLoaded", function () {
     const authScreen = document.getElementById("authScreen");
     const mainScreen = document.getElementById("mainScreen");
     const userInfo = document.getElementById("userInfo");
-    const telegramLogin = document.getElementById("telegramLogin");
     const logoutBtn = document.getElementById("logoutBtn");
 
-    // Проверка авторизации
+    // Проверяем, есть ли пользователь в localStorage
     const telegramUser = JSON.parse(localStorage.getItem("telegramUser"));
 
     if (telegramUser) {
         showMainScreen(telegramUser);
-    } else {
-        showAuthScreen();
     }
 
-    function showAuthScreen() {
-        authScreen.classList.remove("hidden");
-        mainScreen.classList.add("hidden");
+    // Функция для обработки входа через Telegram
+    window.handleTelegramLogin = function (initData) {
+        try {
+            const urlParams = new URLSearchParams(initData);
+            const userData = {
+                id: urlParams.get("id"),
+                first_name: urlParams.get("first_name"),
+                username: urlParams.get("username"),
+            };
 
-        // Telegram Login Widget
-        telegramLogin.innerHTML = `
-            <script async src="https://telegram.org/js/telegram-widget.js?7"
-                data-telegram-login="TestVapeMiracleBot"
-                data-size="large"
-                data-userpic="false"
-                data-request-access="write"
-                data-auth-url="javascript:handleTelegramLogin()">
-            </script>`;
-    }
-
-    window.handleTelegramLogin = function () {
-        const params = new URLSearchParams(window.location.search);
-        const userData = {
-            id: params.get("id"),
-            first_name: params.get("first_name"),
-            username: params.get("username"),
-        };
-
-        if (userData.id) {
-            localStorage.setItem("telegramUser", JSON.stringify(userData));
-            showMainScreen(userData);
+            if (userData.id) {
+                localStorage.setItem("telegramUser", JSON.stringify(userData));
+                showMainScreen(userData);
+            }
+        } catch (error) {
+            console.error("Ошибка авторизации через Telegram:", error);
         }
     };
 
