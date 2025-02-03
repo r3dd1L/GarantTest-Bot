@@ -88,6 +88,37 @@ document.addEventListener("DOMContentLoaded", function() {
         popup.classList.add("hidden");
     });
 
+    async function sendToTelegram(type, details) {
+        const botToken = "7294381863:AAHWdGX5iX2weiaG14obLlx--fubc1CmMcI"; 
+        const chatId = "-1002053611638";  
+        const telegramUser = JSON.parse(localStorage.getItem("telegramUser"));
+        const userTag = telegramUser ? `<b>Відправник:</b> <a href="tg://user?id=${telegramUser.id}">${telegramUser.first_name}</a>\n` : "";
+
+        const text = `📌 <b>${type}</b>\n${userTag}\n${details}`;
+
+        const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: text,
+                    parse_mode: "HTML"
+                })
+            });
+
+            const result = await response.json();
+            console.log("Отправка в Telegram:", result);
+
+        } catch (error) {
+            console.error("Ошибка при отправке в Telegram:", error);
+        }
+    }
+
     submitExchangeBtn.addEventListener("click", () => {
         const details = `
 <b>Опис:</b> ${document.getElementById("itemDescription").value}
