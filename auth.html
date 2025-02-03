@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <script>
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return Object.fromEntries(params.entries());
+        }
+
+        window.onload = function () {
+            const userData = getUrlParams();
+            if (userData.id && userData.first_name) {
+                localStorage.setItem("telegramUser", JSON.stringify(userData));
+                window.location.href = "index.html"; // Возвращаем пользователя на главную
+            }
+        };
+    </script>
+</head>
+<body>
+    <h2>Авторизація...</h2>
+</body>
+</html>

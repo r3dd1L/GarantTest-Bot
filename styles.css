@@ -1,0 +1,225 @@
+/* Основные стили */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
+  background-size: 200% 200%;
+  animation: backgroundMove 6s infinite;
+  color: white;
+  overflow: hidden;
+}
+
+@keyframes backgroundMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.8);
+  max-width: 400px;
+  width: 90%;
+  position: relative;
+}
+
+.screen {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  display: none;
+}
+
+.screen.active {
+  opacity: 1;
+  transform: translateY(0);
+  display: block;
+}
+
+.btn,
+.input {
+  margin: 10px 0;
+  font-size: 18px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.btn {
+  background: #6a0dad;
+  color: white;
+  cursor: pointer;
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+  box-shadow: 0 0 10px #ffffffaa;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.btn:disabled {
+  background: #444;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.btn-glow {
+  box-shadow: 0 0 15px #d76dff, 0 0 30px #d76dff;
+  animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 15px #d76dff;
+  }
+
+  100% {
+    box-shadow: 0 0 30px #d76dff;
+  }
+}
+
+.input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid #6a0dad;
+}
+
+.home-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid #ffffffaa;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.3s;
+  z-index: 10;
+}
+
+.home-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.home-btn svg {
+  fill: white;
+  width: 24px;
+  height: 24px;
+}
+
+@media (max-width: 600px) {
+
+  .btn,
+  .input {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .container {
+    max-width: 95%;
+    padding: 15px;
+  }
+
+  .home-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .home-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.back-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  max-width: none;
+  padding: 10px 16px;
+}
+
+.back-btn svg {
+  margin-right: 8px;
+  fill: white;
+  width: 18px;
+  height: 18px;
+}
+
+/* История запросов */
+.history-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.history-list li {
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid #6a0dad;
+  margin: 5px 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.history-list li:hover {
+  background: #6a0dad;
+}
+
+/* Всплывающее окно */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+}
+
+.popup.hidden {
+  display: none;
+}
+
+.popup-content {
+  background: #3a1c71;
+  padding: 20px;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
