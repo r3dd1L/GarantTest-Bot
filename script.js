@@ -4,11 +4,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const userInfo = document.getElementById("userInfo");
     const logoutBtn = document.getElementById("logoutBtn");
 
-    // Проверяем, есть ли пользователь в localStorage
-    const telegramUser = JSON.parse(localStorage.getItem("telegramUser"));
+    function checkAuth() {
+        const telegramUser = JSON.parse(localStorage.getItem("telegramUser"));
 
-    if (telegramUser) {
-        showMainScreen(telegramUser);
+        if (telegramUser) {
+            showMainScreen(telegramUser);
+        } else {
+            showAuthScreen();
+        }
+    }
+
+    function showAuthScreen() {
+        authScreen.classList.remove("hidden");
+        mainScreen.classList.add("hidden");
     }
 
     function showMainScreen(user) {
@@ -22,4 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
             window.location.reload();
         });
     }
+
+    checkAuth();
 });
