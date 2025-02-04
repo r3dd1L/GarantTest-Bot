@@ -35,3 +35,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     checkAuth();
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("Проверяем sessionStorage:", sessionStorage.getItem("telegramUser"));
+    const telegramUser = JSON.parse(sessionStorage.getItem("telegramUser"));
+
+    if (telegramUser) {
+        document.getElementById("authScreen").classList.add("hidden");
+        document.getElementById("mainScreen").classList.remove("hidden");
+        document.getElementById("userInfo").innerHTML =
+            `👤 Вхід виконано: <b>${telegramUser.first_name}</b> (@${telegramUser.username || "немає ніку"})`;
+    } else {
+        document.getElementById("authScreen").classList.remove("hidden");
+        document.getElementById("mainScreen").classList.add("hidden");
+    }
+});
