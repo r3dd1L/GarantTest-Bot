@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const logoutBtn = document.getElementById("logoutBtn");
 
     function checkAuth() {
-        const telegramUser = JSON.parse(localStorage.getItem("telegramUser"));
+        const telegramUser = JSON.parse(sessionStorage.getItem("telegramUser"));
 
         if (telegramUser) {
             showMainScreen(telegramUser);
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
         userInfo.innerHTML = `👤 Вхід виконано: <b>${user.first_name}</b> (@${user.username || "немає ніку"})`;
 
         logoutBtn.addEventListener("click", function () {
-            localStorage.removeItem("telegramUser");
+            sessionStorage.removeItem("telegramUser");
             window.location.reload();
         });
     }
