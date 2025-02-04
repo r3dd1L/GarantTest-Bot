@@ -5,13 +5,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const logoutBtn = document.getElementById("logoutBtn");
 
     function checkAuth() {
-        const telegramUser = JSON.parse(sessionStorage.getItem("telegramUser"));
+        setTimeout(() => {
+            const telegramUser = JSON.parse(localStorage.getItem("telegramUser"));
 
-        if (telegramUser) {
-            showMainScreen(telegramUser);
-        } else {
-            showAuthScreen();
-        }
+            if (telegramUser) {
+                showMainScreen(telegramUser);
+            } else {
+                showAuthScreen();
+            }
+        }, 500); // Даем браузеру 500 мс на загрузку localStorage
     }
 
     function showAuthScreen() {
@@ -26,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
         userInfo.innerHTML = `👤 Вхід виконано: <b>${user.first_name}</b> (@${user.username || "немає ніку"})`;
 
         logoutBtn.onclick = function () {
-            sessionStorage.removeItem("telegramUser");
+            localStorage.removeItem("telegramUser");
             window.location.reload();
         };
     }
