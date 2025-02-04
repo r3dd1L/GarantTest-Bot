@@ -25,10 +25,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         userInfo.innerHTML = `👤 Вхід виконано: <b>${user.first_name}</b> (@${user.username || "немає ніку"})`;
 
-        logoutBtn.addEventListener("click", function () {
+        logoutBtn.onclick = function () {
             sessionStorage.removeItem("telegramUser");
             window.location.reload();
-        });
+        };
     }
 
     checkAuth();

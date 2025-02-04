@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,9 +14,12 @@
             const userData = getUrlParams();
             if (userData.id && userData.first_name) {
                 sessionStorage.setItem("telegramUser", JSON.stringify(userData));
-                window.location.replace("index.html"); // Возвращаем на главную
+                document.body.innerHTML = "<h2>Успешный вход! Перенаправление...</h2>";
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 1500);
             } else {
-                document.body.innerHTML = "<h2>Помилка авторизації!</h2>";
+                document.body.innerHTML = "<h2>Ошибка авторизации!</h2>";
             }
         };
     </script>
